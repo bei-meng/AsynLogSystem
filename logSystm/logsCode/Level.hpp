@@ -8,7 +8,7 @@ public:
     enum class value{DEBUG,INFO,WARN,ERROR,FATAL};
 
     // 日志等级的字符串转换接口
-    static const char* ToSring(value level){
+    static const char* ToString(value level){
         switch(level){
             case value::DEBUG:
                 return "DEBUG";
