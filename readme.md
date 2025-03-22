@@ -10,8 +10,11 @@
     - config的地址也使用单例模式，静态成员初始化
 
 ### 2.logSystm/logsCode/LogFlush.h
-- LogFlush虚基类，作为后面多种日志刷新类的基类，多态，必须实现Flush函数
+- LogFlush虚基类，作为后面多种日志刷新类的基类，派生类必须实现Flush函数
 - StdoutFlush类，将日志刷到标准输出
-- FileFlush类，文件刷入文件（根据flush_log来决定何时刷入磁盘，0写入用户缓存，1写入内核缓存，2刷到磁盘
-- RollFileFlush类，滚动日志文件，一个日志文件超过设定大小就好自动创建新的log文件
+- FileFlush类，文件刷入文件，根据flush_log来决定何时刷入磁盘，0写入用户缓存，1写入内核缓存，2刷到磁盘
+- RollFileFlush类，滚动日志文件，一个日志文件超过设定大小就会自动创建新的log文件，同样受到flush_log控制
 - LogFlushFactory类，建造者模式，日志刷新工厂类，使用模板，完美转发实现对应日志类的构建，易扩展
+
+### 2.logSystm/logsCode/AsyncBuffer.h
+- 异步缓冲区模块，业务需要写一条日志的话，会被存放到AsyncBuffer里面，生产者消费者模型，使用双缓冲区设计，生产者缓冲区和消费者缓冲区，如果生产者缓冲区中有内容就和消费者缓冲区交换，不是数据复制。
