@@ -55,14 +55,14 @@ private:
                     cond_productor_.notify_one();
                 }
             }//超出作用域，自动释放锁
-
-            // 调用回调函数对缓冲区中数据进行处理
-            callback_(buffer_consumer_);
-            buffer_consumer_.Reset();
+            
             // 只有当停止且生产者为空才返回
             if(stop_ && buffer_productor_.IsEmpty()){
                 return;
             }
+            // 调用回调函数对缓冲区中数据进行处理
+            callback_(buffer_consumer_);
+            buffer_consumer_.Reset();
         }
     }
 
