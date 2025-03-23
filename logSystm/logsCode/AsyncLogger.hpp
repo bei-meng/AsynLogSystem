@@ -31,6 +31,11 @@ protected:
         if(level == LogLevel::value::FATAL||level==LogLevel::value::ERROR){
             try{
                 auto ret = tp->enqueue(start_backup,data);
+                // get()：阻塞调用线程，直到任务完成，并返回任务的返回值。
+                // 如果任务抛出异常，get() 会重新抛出该异常。
+
+                // 不阻塞主线程的执行
+                // ret.get();
             }catch(const std::runtime_error &e){
                 // 该线程池没有把stop设置为true的逻辑，所以不做处理
                 std::cout << __FILE__ << __LINE__ << "thread pool closed" << std::endl;

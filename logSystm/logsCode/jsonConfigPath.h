@@ -10,4 +10,4 @@ private:
 };
     
 // 静态成员初始化
-std::string JsonConfigPath::jsonconfigPath_ = "../../log_system/logs_code/config.conf";
+std::string JsonConfigPath::jsonconfigPath_ = "../../logSystm/logsCode/config.conf";

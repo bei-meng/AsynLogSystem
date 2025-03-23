@@ -103,7 +103,7 @@ namespace Util{
             std::ifstream ifs;
             ifs.open(filename.c_str(),std::ios::binary);
             if(ifs.is_open()==false){
-                std::cerr << __FILE__ << __LINE__ << ":";
+                std::cerr << __FILE__ << __LINE__ << ": ";
                 perror("open file error: ");
                 return false;
             }
@@ -150,7 +150,7 @@ namespace Util{
             std::unique_ptr<Json::CharReader> ucr(crb.newCharReader());
             std::string err;
             if(ucr->parse(str.c_str(),str.c_str()+str.size(),val,&err)==false){
-                std::cerr <<__FILE__<<__LINE__<<"parse error" << err<<std::endl;
+                std::cerr <<__FILE__<<__LINE__<<" parse error " << err<<std::endl;
                 return false;
             }
             return true;

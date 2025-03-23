@@ -79,7 +79,7 @@ public:
             if(stop){
                 throw std::runtime_error("enqueue on stopped ThreadPool");
             }
-            tasks.emplace([task]{
+            tasks.emplace([task](){
                 (*task)();
             });
         }
