@@ -150,7 +150,7 @@ namespace Util{
             std::unique_ptr<Json::CharReader> ucr(crb.newCharReader());
             std::string err;
             if(ucr->parse(str.c_str(),str.c_str()+str.size(),val,&err)==false){
-                std::cout <<__FILE__<<__LINE__<<"parse error" << err<<std::endl;
+                std::cerr <<__FILE__<<__LINE__<<"parse error" << err<<std::endl;
                 return false;
             }
             return true;
@@ -163,7 +163,7 @@ namespace Util{
             std::string content;
             const std::string& path = JsonConfigPath::GetConfigPath();
             if(mylog::Util::File::GetContent(content,path)==false){
-                std::cout << __FILE__ << __LINE__  << std::endl;
+                std::cerr << __FILE__ << __LINE__  << std::endl;
                 perror("open config.conf failed:");
             }
             Json::Value root;

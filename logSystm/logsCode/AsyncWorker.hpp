@@ -90,6 +90,7 @@ public:
     }
 
     void Push(const char* data,size_t len){
+        // 如果数据超过缓冲区最大，就会导致问题，应该改成写一部分，消费一部分
         // 如果生产者队列不足以写下len长度数据，并且缓冲区是固定大小，那么阻塞
         std::unique_lock<std::mutex> lock(mtx_);
         if(AsyncType::ASYNC_SAFE == async_type_){
