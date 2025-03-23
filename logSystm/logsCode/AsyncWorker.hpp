@@ -38,15 +38,16 @@ private:
                 //缓冲区交换完就解锁，让productor继续写入数据
                 std::unique_lock<std::mutex> lock(mtx_);
                 // 有数据则交换，无数据就阻塞
-                if(buffer_productor_.IsEmpty()&&stop_){
+                // if(buffer_productor_.IsEmpty()){
                     // 只有当pred条件为false时调用该wait函数才会阻塞当前线程，
                     // 并且在收到其它线程的通知后只有当pred为true时才会被解除阻塞
                     // 即没有停止，且生产者为空时，false条件变量就会阻塞当前线程，同时释放锁，等待通知
                     // 当停止或者不为空，true且收到通知，条件变量才解除阻塞,并获取锁
+                    // 等待生产者缓冲区不为空或停止
                     cond_consumer_.wait(lock,[&](){
                         return stop_ || !buffer_productor_.IsEmpty();
                     });
-                }
+                // }
                 // 下面一直都获得了锁，有锁交换不会出问题，因为生产者被阻塞了
                 // 生产者消费者缓冲区交换
                 buffer_consumer_.Swap(buffer_productor_);
