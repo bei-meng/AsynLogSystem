@@ -9,7 +9,7 @@
 #include <string>
 #include <sys/stat.h>
 #include <fstream>
-#include "../../logSystm/logsCode/MyLog.hpp"
+#include "../../logSystem/logsCode/MyLog.hpp"
 namespace storage{
     namespace fs = std::experimental::filesystem;
 
@@ -235,8 +235,9 @@ namespace storage{
             Json::CharReaderBuilder crb;
             std::unique_ptr<Json::CharReader> ucr(crb.newCharReader());
             std::string err;
-            if(ucr->parse(str.c_str(),str.c_str()+str.size(),val,&err)){
-                mylog::GetLogger("asynclogger")->Info("parse error");
+
+            if(ucr->parse(str.c_str(),str.c_str()+str.size(),val,&err)==false){
+                mylog::GetLogger("asynclogger")->Error("parse error");
                 return false;
             }
             return true;
