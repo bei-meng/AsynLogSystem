@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 ThreadPool* tp=nullptr;
-mylog::Util::JsonData* g_conf_data;
+mylog::Config* g_conf_data;
 void test() {
     int cur_size = 0;
     int cnt = 1;
@@ -22,7 +22,7 @@ void init_thread_pool() {
     tp = new ThreadPool(g_conf_data->thread_count);
 }
 int main() {
-    g_conf_data = mylog::Util::JsonData::GetJsonData();
+    g_conf_data = mylog::Config::GetConfig();
     init_thread_pool();
     std::shared_ptr<mylog::LoggerBuilder> Glb(new mylog::LoggerBuilder());
     Glb->BuildLoggerName("asynclogger");

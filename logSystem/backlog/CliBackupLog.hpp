@@ -13,7 +13,7 @@
 #include<unistd.h>
 
 #include "../logsCode/Util.hpp"
-extern mylog::Util::JsonData *g_conf_data;
+extern mylog::Config *g_conf_data;
 void start_backup(const std::string &message){
     int sock = socket(AF_INET,SOCK_STREAM,0);
     if(sock<0){

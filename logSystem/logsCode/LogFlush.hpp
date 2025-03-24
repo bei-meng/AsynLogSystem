@@ -9,7 +9,7 @@
 
 #include "Util.hpp"
 // 单例模式创建得到的JsonData数据
-extern mylog::Util::JsonData* g_conf_data;
+extern mylog::Config* g_conf_data;
 namespace mylog{
     // 基类LogFlush
     class LogFlush{

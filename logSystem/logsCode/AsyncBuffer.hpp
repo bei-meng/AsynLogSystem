@@ -4,8 +4,9 @@
 #include <string>
 #include <vector>
 #include "Util.hpp"
+#include"config.hpp"
 
-extern mylog::Util::JsonData* g_conf_data;
+extern mylog::Config* g_conf_data;
 namespace mylog{
     class Buffer{
     protected:
