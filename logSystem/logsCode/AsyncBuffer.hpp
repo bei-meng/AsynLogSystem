@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "Util.hpp"
-#include"config.hpp"
+#include"Config.hpp"
 
 extern mylog::Config* g_conf_data;
 namespace mylog{
