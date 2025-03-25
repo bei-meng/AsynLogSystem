@@ -13,7 +13,7 @@ namespace storage{
 
         bool NewStorageInfo(const std::string &storage_path){
             // 初始化备份文件的信息
-            mylog::GetLogger("asynclogger")->Info("NewStorageInfo start");
+            mylog::GetLogger("asynclogger")->Debug("NewStorageInfo start");
             FileUtil f(storage_path);
             if(!f.Exists()){
                 mylog::GetLogger("asynclogger")->Info("file not exists");
@@ -27,9 +27,9 @@ namespace storage{
             // URL实际上就是用户下载文件请求的路径
             // 下载路径前缀+文件名
             storage::Config *config = storage::Config::GetInstance();
-            url_ = config->GetDownloadPrefix()+f.FileName();
+            url_ = config->GetDownloadPrefix()+storage_path_.substr(2);
             mylog::GetLogger("asynclogger")->Info("download_url:%s,mtime_:%s,atime_:%s,fsize_:%d", url_.c_str(),ctime(&mtime_),ctime(&atime_),fsize_);
-            mylog::GetLogger("asynclogger")->Info("NewStorageInfo end");
+            mylog::GetLogger("asynclogger")->Debug("NewStorageInfo end");
             return true;
         }
     };//StorageInfo
@@ -41,7 +41,7 @@ namespace storage{
         std::unordered_map<std::string,StorageInfo> table_;
     public:
         DataManager(){
-            mylog::GetLogger("asynclogger")->Info("DataManager construct start");
+            mylog::GetLogger("asynclogger")->Debug("DataManager construct start");
             storage_file_ = storage::Config::GetInstance()->GetStorageInfoFile();
             pthread_rwlock_init(&rwlock_,NULL);
             InitLoad();
@@ -53,7 +53,7 @@ namespace storage{
 
         bool InitLoad(){
             // 初始化程序运行时从文件读取数据
-            mylog::GetLogger("asynclogger")->Info("init datamanager");
+            mylog::GetLogger("asynclogger")->Debug("init datamanager");
             storage::FileUtil f(storage_file_);
             if(!f.Exists()){
                 mylog::GetLogger("asynclogger")->Info("there is no storage file info need to load");
@@ -115,7 +115,7 @@ namespace storage{
 
             std::string body;
             JsonUtil::Serialize(root,body);
-            mylog::GetLogger("asynclogger")->Info("new message for StorageInfo:%s", body.c_str());
+            // mylog::GetLogger("asynclogger")->Info("new message for StorageInfo:%s", body.c_str());
 
             FileUtil f(storage_file_);
             if(f.SetContent(body.c_str(),body.size())==false){

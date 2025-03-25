@@ -14,6 +14,7 @@ namespace storage{
         std::string deep_storage_dir_;      //深度存储文件的存储路径
         std::string low_storage_dir_;       //浅度存储文件的存储路径
         std::string storage_info_;          //已存储文件的信息
+        std::string uncompress_dir_;        //用于解压缩文件夹
         int bundle_format_;                 //深度存储的文件后缀，由选择的压缩格式确定
     
     private:
@@ -47,6 +48,7 @@ namespace storage{
             deep_storage_dir_ = root["deep_storage_dir"].asString();
             low_storage_dir_ = root["low_storage_dir"].asString();
             bundle_format_ = root["bundle_format"].asInt();
+            uncompress_dir_ = root["uncompress_dir"].asString();
 
             return true;
         }
@@ -59,6 +61,7 @@ namespace storage{
         std::string GetDeepStorageDir(){ return deep_storage_dir_; }
         std::string GetLowStorageDir(){ return low_storage_dir_; }
         std::string GetStorageInfoFile() { return storage_info_; }
+        std::string GetUnCompressDir() { return uncompress_dir_; }
     
     public:
         // 获取单例对象

@@ -4,4 +4,4 @@ gdb_test:Test.cpp
 	g++ -g -o $@ $^ -std=c++17 -lpthread -lstdc++fs -ljsoncpp  -lbundle -levent
 .PHONY:clean
 clean:
-	rm -rf test gdb_test ./deep_storage ./low_storage ./logfile storage.data
+	rm -rf test gdb_test ./deep_storage ./low_storage ./logfile ./uncompress storage.data
