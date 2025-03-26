@@ -1,4 +1,12 @@
 logSystem/examples/logfile
 logSystem/backlog/logfile.log
+
+
+src/server/logfile
+src/server/low_storage
+src/server/deep_storage
+output.log
+storage.data
+test
 .vscode/
 记录.txt
