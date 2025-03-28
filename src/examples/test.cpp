@@ -1,6 +1,7 @@
-#include "../logsCode/MyLog.hpp"
-#include "../logsCode/ThreadPoll.hpp"
-#include "../logsCode/Util.hpp"
+#include "../../logSystem/logsCode/MyLog.hpp"
+#include "../../logSystem/logsCode/ThreadPoll.hpp"
+#include "../../logSystem/logsCode/Util.hpp"
+#include <chrono>
 using std::cout;
 using std::endl;
 
@@ -9,13 +10,18 @@ mylog::Config* g_conf_data;
 void test() {
     int cur_size = 0;
     int cnt = 1;
-    while (cur_size++ < 2) {
-        mylog::GetLogger("asynclogger")->Info("测试日志-%d", cnt++);
-        mylog::GetLogger("asynclogger")->Warn("测试日志-%d", cnt++);
-        mylog::GetLogger("asynclogger")->Debug("测试日志-%d", cnt++);
-        mylog::GetLogger("asynclogger")->Error("测试日志-%d", cnt++);
-        mylog::GetLogger("asynclogger")->Fatal("测试日志-%d", cnt++);
+    auto logger = mylog::GetLogger("asynclogger");
+    auto start = std::chrono::high_resolution_clock::now();
+    while (cur_size++ < 500000) {
+        logger->Info("测试日志-%d", cnt++);
+        logger->Warn("测试日志-%d", cnt++);
+        logger->Debug("测试日志-%d", cnt++);
+        // logger->Error("测试日志-%d", cnt++);
+        // logger->Fatal("测试日志-%d", cnt++);
     }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << "程序运行时间：" << duration.count() << " 微秒" << std::endl;
 }
 
 void init_thread_pool() {

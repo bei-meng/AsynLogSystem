@@ -1,7 +1,5 @@
-logSystem/examples/logfile
 logSystem/backlog/logfile.log
-
-
+src/examples/logfile
 src/server/logfile
 src/server/low_storage
 src/server/deep_storage
